@@ -1,0 +1,85 @@
+<template>
+    <lightning-button
+        name="new-with-defaults"
+       label="Create WorkOrder"
+       class="slds-m-around_medium"
+       data-record-id={recordId}
+       onclick={openModal}>
+    </lightning-button>
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Child WorkOrder</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-edit-form object-api-name="WorkOrder" onsubmit={handleSubmit}>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_2-of-2">
+                                <section class="sec">
+                                    <h2>Information</h2>
+                                </section>
+                            </div>
+                            <div class="slds-size_1-of-2 slds-p-left_medium">
+                                <lightning-input-field field-name="WorkTypeId" required></lightning-input-field>
+                                <lightning-input-field field-name="ServiceTerritoryId"  value={serviceTerritory}></lightning-input-field>
+                                <lightning-input-field field-name="Status" required></lightning-input-field>
+                            </div>
+                            <div class="slds-size_1-of-2 slds-p-left_medium">
+                                <lightning-input-field field-name="ParentWorkOrderId" value={recordId}></lightning-input-field>
+                                <lightning-input-field field-name="AccountId"  value={accountId}></lightning-input-field>
+                            </div>
+                             
+                                <div class="slds-size_2-of-2">
+                                    <section class="sec">
+                                        <h2>Address</h2>
+                                    </section>
+                                    <h2 style="font-weight:bold;" align="left_medium">Address</h2>
+                                    <div class="address slds-p-left_medium">
+                                        <lightning-input-field field-name="Street" value={street}></lightning-input-field>
+                                        <lightning-input-field field-name="City" value={city}></lightning-input-field>
+                                        <div class="slds-grid">
+                                            <div class="slds-col">
+                                                <lightning-input-field field-name="State" value={state}></lightning-input-field>
+                                            </div>
+                                            <div class="slds-col">
+                                                <lightning-input-field field-name="PostalCode" value={postalcode}></lightning-input-field>
+                                            </div>
+                                        </div>
+                                        <lightning-input-field field-name="Country" value={country}></lightning-input-field>
+                                    </div>
+                                </div>
+                                <div class="slds-size_2-of-2">
+                                    <section class="sec">
+                                        <h2>Time Contraints</h2>
+                                    </section>
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-p-left_medium">
+                                            <lightning-input-field field-name="StartDate" value={startdate} required></lightning-input-field>
+                                        </div>
+                                        <div class="slds-col slds-p-right_medium">    
+                                            <lightning-input-field class="slds-p-right_medium" field-name="EndDate"  value={enddate} required></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <lightning-button variant="Neutral" label="Cancel" class="slds-float_right" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" type="submit" label="Save" class="slds-float_right"></lightning-button>
+                    </lightning-record-edit-form>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
