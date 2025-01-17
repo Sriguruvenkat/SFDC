@@ -2,6 +2,7 @@ import { LightningElement,api,wire} from 'lwc';
 import getWorkOrdersForAccount from '@salesforce/apex/WorkOrderController.getWorkOrdersForAccount';
 
 export default class DatatableExample extends LightningElement {
+    //example
     @api recordId;
     data=[];
     error;
